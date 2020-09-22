@@ -25,4 +25,5 @@ import {FCM} from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  
 }

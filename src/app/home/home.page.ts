@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Platform } from '@ionic/angular';
 
 import { INotificationPayload } from 'cordova-plugin-fcm-with-dependecy-updated';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import { FirebaseSendNotificationService } from '../firebase-send-notification-service.service';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +15,18 @@ export class HomePage {
   public hasPermission: boolean;
   public token: string;
   public pushPayload: INotificationPayload;
+  public pushNotificarion: void;
+  public notificationForm: FormGroup;
 
-  constructor(private platform: Platform, private fcm: FCM) {
+  constructor(
+    private platform: Platform, private fcm: FCM,
+    private firebaseSendNotificationServiceService: FirebaseSendNotificationService
+  ) {
     this.setupFCM();
+    this.notificationForm = new FormGroup({
+      title: new FormControl(''),
+      content: new FormControl('')
+    });
   }
   private async setupFCM() {
     await this.platform.ready();
@@ -50,5 +61,10 @@ export class HomePage {
 
   public get pushPayloadString() {
     return JSON.stringify(this.pushPayload, null, 4);
+  }
+
+  pushNotific = async () => {
+    const teste = await this.firebaseSendNotificationServiceService.send()
+    console.log('pushNotific >> ', teste)
   }
 }
