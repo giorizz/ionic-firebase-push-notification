@@ -43,6 +43,9 @@ export class HomePage {
 
     this.token = await this.fcm.getToken();
     console.log('getToken result: ', this.token);
+    //token do aparelho de teste
+    // dmCt_jQQe4I:APA91bHwg9Seg9yitx8Y8WDLHfvX0T6mcLmMLEyyCnmfqRAqNan5VkTvUvhbLOo9tKav4QeH2Dhsh4K_ce9f8igO2GxMpVb3qtb0wr-FHqAM2dXmb_Uh9vxL4nE7oIG5O4H22uKPLDw-
+
 
     this.pushPayload = await this.fcm.getInitialPushPayload();
     console.log('getInitialPushPayload result: ', this.pushPayload);
